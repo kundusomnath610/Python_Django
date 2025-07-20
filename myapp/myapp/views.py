@@ -2,6 +2,7 @@ from django.http import HttpResponse
 #import datetime
 
 from django.shortcuts import render
+from django.template import TemplateDoesNotExist
 
 
 def home(request):
@@ -15,7 +16,11 @@ def about(request):
     #return render(request, "index.html", {})
 
 def services(request):
-    return render(request, "services.html", {})
+    try:
+        return render(request, "services.html", {})
+    except TemplateDoesNotExist:
+        return HttpResponse("Tempalate Dose not Exist..")
+
 
 def controller(request):
     return render(request, "controller.html", {})
