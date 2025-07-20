@@ -12,8 +12,8 @@ def home(request):
 
 
 def about(request):
-    return HttpResponse("<h1> This is about page</h1>")
-    #return render(request, "index.html", {})
+    #return HttpResponse("<h1> This is about page</h1>")
+    return render(request, "index.html", {})
 
 def services(request):
     try:
@@ -23,4 +23,7 @@ def services(request):
 
 
 def controller(request):
-    return render(request, "controller.html", {})
+    try:
+        return render(request, "controller.html", {})
+    except FileNotFoundError:
+        return HttpResponse("Controller not found")
